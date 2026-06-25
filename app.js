@@ -7,8 +7,8 @@ const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   
-  // Single quote (') ko badalkar Backtick (`) kar diya hai taaki multi-line text support kare
-  res.end(`deep learning is a subset of machine learning techniques
+  // Base text jisme saari lines hain (Approx 4.6 KB)
+  const baseText = `deep learning is a subset of machine learning techniques
 artificial intelligence systems are used in healthcare and finance
 python programming is beginner friendly and powerful
 data preprocessing is a crucial step in building models
@@ -76,7 +76,12 @@ neural networks are powerful for pattern recognition
 lstm networks are effective for sequential data
 sequence models can be trained using large datasets
 time series prediction is important for business analytics
-natural language processing is used in virtual assistants\n`);
+natural language processing is used in virtual assistants\n`;
+
+  // 22 baar repeat karne par yeh exact 100 KB+ (approx 102 KB) ka text block banayega
+  const largeData = baseText.repeat(22);
+  
+  res.end(largeData);
 });
 
 server.listen(port, hostname, () => {
