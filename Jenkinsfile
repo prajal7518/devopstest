@@ -1,5 +1,9 @@
 pipeline {
     agent any // Runs on any available Jenkins agent/node
+    // YEH LINES ADD KAREIN 👇
+    tools {
+        nodejs 'node' // Yeh wahi naam hai jo humne Step 2 mein rakha tha
+    }
 
     environment {
         // Define variables here if needed
