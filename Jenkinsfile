@@ -29,14 +29,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying application on HTTP Server...'
-                // Purane chal rahe node process ko kill karein taaki port 3000 khali ho sake
+                // Purane node process ko stop karein
                 sh 'pkill -f "node app.js" || true'
                 
-                // App ko background mein run karein taaki pipeline aage badh sake
-                sh 'nohup node app.js > output.log 2>&1 &'
+                // JENKINS_NODE_COOKIE dene se Jenkins is process ko kill nahi karega
+                sh "JENKINS_NODE_COOKIE=dontKillMe nohup node app.js > output.log 2>&1 &"
                 
                 echo 'Application is running on port 3000!'
             }
         }
-    }
-}
