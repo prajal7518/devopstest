@@ -51,25 +51,4 @@ pipeline {
             echo 'Pipeline failed. ❌ Check the logs.'
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-A
-A
-A
-A
-A
-A
-A
 }
