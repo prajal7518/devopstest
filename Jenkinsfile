@@ -31,13 +31,16 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
-                // Add your deployment commands here (e.g., Docker, AWS, Heroku)
-                // Example: sh 'docker build -t myapp . && docker run -d -p 3000:3000 myapp'
-                sh 'echo "Application deployed successfully!"'
+                echo 'Deploying application on HTTP Server...'
+                // Agar pehle se koi node app chal rahi hai toh use stop karein (taaki port conflict na ho)
+                sh 'pkill -f "node app.js" || true'
+                
+                // App ko background mein run karein taaki Jenkins pipeline block na ho
+                sh 'nohup node app.js > output.log 2>&1 &'
+                
+                echo 'Application is running on port 3000!'
             }
         }
-    }
 
     post {
         always {
